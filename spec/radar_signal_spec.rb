@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 RSpec.describe RadarSignal do
-  describe "#at_index" do
-    it "returns symbol at index" do
-      signal = RadarSignal.new("o-o")
-      expect(signal.at_index(1)).to eql("-")
+  describe "#rows" do
+    it "returns signal rows" do
+      signal = RadarSignal.new("oo\n--\n")
+      expect(signal.rows).to eql([["o", "o"], ["-", "-"]])
     end
   end
 
-  describe "#length" do
-    it "returns symbol count of signal" do
-      signal = RadarSignal.new("o-o")
-      expect(signal.length).to eql(3)
+  describe "#columns" do
+    it "returns signal columns" do
+      signal = RadarSignal.new("oo\n--\n")
+      expect(signal.columns).to eql([["o", "-"], ["o", "-"]])
     end
   end
 end

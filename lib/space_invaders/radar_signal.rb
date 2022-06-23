@@ -5,11 +5,11 @@ class RadarSignal
     @signal = signal
   end
 
-  def at_index(index)
-    signal[index]
+  def columns
+    rows.transpose
   end
 
-  def length
-    signal.length
+  def rows
+    signal.split("\n").map(&:chars)
   end
 end
