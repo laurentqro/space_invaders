@@ -14,4 +14,11 @@ RSpec.describe RadarSignal do
       expect(signal.columns).to eql([["o", "-"], ["o", "-"]])
     end
   end
+
+  describe "#size" do
+    it "returns signal size" do
+      signal = RadarSignal.new("oo\n--\n")
+      expect(signal.size).to eql(4)
+    end
+  end
 end

@@ -1,16 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe SpaceInvaders do
-  describe ".calculate_distance" do
-    it "returns the Hamming distance between two arrays" do
-      signal_1 = "ooo"
-      signal_2 = "o-o"
-
-      expect(SpaceInvaders.calculate_distance(signal_1, signal_2)).to eql(1)
-    end
-  end
-
-  describe ".analyse" do
+  describe ".calculate_matrices_distance" do
     it "returns the Hamming distance between two matrices" do
       radar_signal = <<~SIGNAL
         oo
@@ -22,50 +13,42 @@ RSpec.describe SpaceInvaders do
         oo
       INVADER
 
-      result = SpaceInvaders.analyse(RadarSignal.new(invader), RadarSignal.new(radar_signal))
+      result = SpaceInvaders.calculate_matrices_distance(RadarSignal.new(invader), RadarSignal.new(radar_signal))
 
-      expect(result).to eql(2)
+      expect(result).to eql(1)
     end
   end
 
-  describe ".submatrices" do
+  describe ".possible_locations" do
     it "returns a list of target-sized sub-matrices for the given radar sample" do
       radar_sample = <<~RADAR
-        123
-        456
-        789
+        ------
+        --oo--
+        --oo--
+        ------
       RADAR
 
       invader = <<~TARGET
-        --
-        --
+        oo
+        oo
       TARGET
 
       expected = [
-        [
-          ["1", "2"],
-          ["4", "5"]
-        ],
-        [
-          ["2", "3"],
-          ["5", "6"]
-        ],
-        [
-          ["4", "5"],
-          ["7", "8"]
-        ],
-        [
-          ["5", "6"],
-          ["8", "9"]
-        ]
+        {
+          accuracy: 1.0,
+          difference_score: 0,
+          position: { x: 2, y: 1 },
+          submatrix: [["o", "o"], ["o", "o"]]
+        }
       ]
 
-      submatrices = SpaceInvaders.submatrices(
+      possible_locations = SpaceInvaders.possible_locations(
         RadarSignal.new(invader),
-        RadarSignal.new(radar_sample)
+        RadarSignal.new(radar_sample),
+        0.75
       )
 
-      expect(submatrices).to eql(expected)
+      expect(possible_locations).to eql(expected)
     end
   end
 end
