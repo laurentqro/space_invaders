@@ -23,4 +23,20 @@ module SpaceInvaders
       radar_signal_1[i] != radar_signal_2[i]
     end
   end
+
+  def self.submatrices(invader, radar_sample)
+    submatrices = []
+
+    (0..radar_sample.rows.length - invader.rows.length).each do |i|
+      (0..radar_sample.columns.length - invader.columns.length).each do |j|
+        submatrix = radar_sample.rows[i..i + (invader.rows.length - 1)]
+          .transpose[j..j + invader.columns.length - 1]
+          .transpose
+
+        submatrices << submatrix
+      end
+    end
+
+    submatrices
+  end
 end
