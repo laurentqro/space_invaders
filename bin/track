@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH << 'lib'
+
+require 'space_invaders'
+require 'space_invaders/cli/display'
+require 'space_invaders/cli/colors'
+
+radar_sample = File.open("./lib/data/radar_sample.txt").read
+invader = File.open("./lib/data/known_invaders/crab.txt").read
+
+SpaceInvaders.possible_locations(
+  Cli::Display.new,
+  RadarSignal.new(invader),
+  RadarSignal.new(radar_sample),
+  0.75
+)
