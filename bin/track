@@ -5,14 +5,15 @@ $LOAD_PATH << 'lib'
 
 require 'space_invaders'
 require 'space_invaders/cli/display'
-require 'space_invaders/cli/colors'
+require 'space_invaders/cli/formatting'
 
 radar_sample = File.open("./lib/data/radar_sample.txt").read
 invader = File.open("./lib/data/known_invaders/crab.txt").read
 
-SpaceInvaders.possible_locations(
-  Cli::Display.new,
+possible_locations = SpaceInvaders.possible_locations(
   RadarSignal.new(invader),
   RadarSignal.new(radar_sample),
   0.75
 )
+
+Cli::Display.render_locations(possible_locations)

@@ -12,7 +12,7 @@ module SpaceInvaders
     end
   end
 
-  def self.possible_locations(display, invader, radar_sample, accuracy)
+  def self.possible_locations(invader, radar_sample, accuracy)
     possible_locations = []
 
     (0..radar_sample.rows.length - invader.rows.length).each do |i|
@@ -37,11 +37,9 @@ module SpaceInvaders
       end
     end
 
-    display.render_locations(
-      possible_locations
+    possible_locations
       .select { |location| location[:accuracy] >= accuracy }
       .sort { |location| location[:accuracy] }
-    )
   end
 
   def self.hamming_distance(radar_signal_1, radar_signal_2)

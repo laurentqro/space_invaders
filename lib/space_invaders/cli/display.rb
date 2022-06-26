@@ -1,11 +1,11 @@
 module Cli
   class Display
 
-    def render_locations(locations)
+    def self.render_locations(locations)
       locations.each { |location| render_location(location) }
     end
 
-    def render_location(location)
+    def self.render_location(location)
       puts "Location #{location[:position][:x]}, #{location[:position][:y]}".magenta.underline
       puts "Accuracy: #{location[:accuracy]}"
       puts "Difference Score: #{location[:difference_score]}"
@@ -18,7 +18,7 @@ module Cli
       blank_line
     end
 
-    def render_matrix(matrix)
+    def self.render_matrix(matrix)
       puts "Detected:"
       blank_line
 
@@ -27,11 +27,11 @@ module Cli
       end
     end
 
-    def render_positions(positions)
+    def self.render_positions(positions)
       puts positions.map { |p| style_position(p) }.join
     end
 
-    def style_position(position)
+    def self.style_position(position)
       if position == "-"
         position.green
       else
@@ -39,7 +39,7 @@ module Cli
       end
     end
 
-    def blank_line
+    def self.blank_line
       puts "\n"
     end
   end
