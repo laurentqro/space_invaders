@@ -12,12 +12,12 @@ module Cli
 
       render_blank_line
 
-      render_matrix(location[:submatrix])
+      render_invader(location[:submatrix])
 
       render_blank_line
     end
 
-    def self.render_matrix(matrix)
+    def self.render_invader(matrix)
       puts "Detected:"
       render_blank_line
 
