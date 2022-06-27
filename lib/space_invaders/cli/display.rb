@@ -6,21 +6,20 @@ module Cli
     end
 
     def self.render_location(location)
-      puts "Location #{location[:position][:x]}, #{location[:position][:y]}".magenta.underline
+      puts "Location (#{location[:position][:x]}, #{location[:position][:y]})".magenta.underline
       puts "Accuracy: #{location[:accuracy]}"
       puts "Difference Score: #{location[:difference_score]}"
-      puts "Position: #{location[:position]}"
 
-      blank_line
+      render_blank_line
 
       render_matrix(location[:submatrix])
 
-      blank_line
+      render_blank_line
     end
 
     def self.render_matrix(matrix)
       puts "Detected:"
-      blank_line
+      render_blank_line
 
       matrix.map do |positions|
         render_positions(positions)
@@ -39,7 +38,7 @@ module Cli
       end
     end
 
-    def self.blank_line
+    def self.render_blank_line
       puts "\n"
     end
   end
