@@ -41,5 +41,7 @@ module Cli
     def self.render_blank_line
       puts "\n"
     end
+
+    private_class_method :render_invader, :render_positions, :style_position, :render_blank_line
   end
 end
