@@ -7,13 +7,14 @@ require 'space_invaders'
 require 'space_invaders/cli/display'
 require 'space_invaders/cli/formatting'
 
-radar_sample = File.open("./lib/data/radar_sample.txt").read
-invader = File.open("./lib/data/known_invaders/crab.txt").read
+invader = RadarSignal.new(File.open(ARGV[0]).read)
+radar_sample = RadarSignal.new(File.open(ARGV[1]).read)
+accuracy = ARGV[2].to_f
 
 possible_locations = SpaceInvaders.possible_locations(
-  RadarSignal.new(invader),
-  RadarSignal.new(radar_sample),
-  0.75
+  invader,
+  radar_sample,
+  accuracy,
 )
 
 Cli::Display.render_locations(possible_locations)
