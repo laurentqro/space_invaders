@@ -19,14 +19,13 @@ RSpec.describe Cli::Display do
       ]
 
       expected_message = <<~EXPECTED
-        \e[4m\e[35mLocation (1, 2)\e[0m\e[24m
+
+        \e[4m\e[35mPossible invader detected at location: (1, 2)\e[0m\e[24m
         Accuracy: 0.9
         Difference Score: 8
 
-        Detected:
-
-        \e[31mo\e[0m\e[32m-\e[0m\n\e[32m-\e[0m\e[31mo\e[0m
-
+        \e[31mo\e[0m\e[32m-\e[0m
+        \e[32m-\e[0m\e[31mo\e[0m
       EXPECTED
 
       expect{ Cli::Display.render_locations(locations) }.to output(expected_message).to_stdout
